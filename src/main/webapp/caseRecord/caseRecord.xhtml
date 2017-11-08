@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../template.xhtml">
+
+            <ui:define name="title">
+                Perinatal Death Documentation Format
+            </ui:define>
+
+            <ui:define name="body">
+
+                <f:view>
+
+
+                    <h:form>
+                        <p:panel  style="margin: auto" >
+                            <f:facet name="header" >
+                                <p:outputLabel value="Perinatal Death Documentation Format" ></p:outputLabel>
+                            </f:facet>
+                            <p:panelGrid  >
+                                <p:row >
+                                    <p:column colspan="2">
+                                        <p:outputLabel value="Hospital" ></p:outputLabel>
+                                        <p:outputLabel value="#{caseRecordController.selected.createInstitute.name}" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column colspan="2" >
+                                    </p:column>
+                                    <p:column colspan="2">
+                                        <p:outputLabel value="Unit" ></p:outputLabel>
+                                        <p:outputLabel value="#{caseRecordController.selected.createdDepartment.name}"></p:outputLabel>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+                            <p:panelGrid >
+                                <p:row >
+                                    <p:column colspan="4" >
+                                        <p:outputLabel value="Summery Sheet" ></p:outputLabel>
+                                    </p:column>
+                                </p:row>
+                                <p:row >
+                                    <p:column >
+                                        <p:outputLabel value="A" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <p:outputLabel value="Clinical Record / BHT No" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <p:outputLabel value="Mother" ></p:outputLabel>
+                                        <p:inputText value="#{caseRecordController.selected.mothersNumber}" ></p:inputText>
+                                    </p:column>
+                                    <p:column >
+                                        <p:outputLabel value="Baby" ></p:outputLabel>
+                                        <p:inputText value="#{caseRecordController.selected.babysNumber}" ></p:inputText>
+                                    </p:column>
+                                </p:row>
+                                <p:row >
+                                    <p:column >
+                                        <p:outputLabel value="B" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <p:outputLabel value="Name of Mother / Baby" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column colspan="2" >
+                                        <p:outputLabel value="Mother" ></p:outputLabel>
+                                        <p:inputText value="#{caseRecordController.selected.nameOfCase}" ></p:inputText>
+                                    </p:column>
+                                </p:row>
+                                <p:row >
+                                    <p:column >
+                                        <p:outputLabel value="C" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <p:outputLabel value="Ethnicity of Mother" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column colspan="3" >
+                                        <p:selectOneButton value="#{caseRecordController.selected.ethnicity}" >
+                                            <f:selectItems value="#{enumController.ethnicities}" ></f:selectItems>
+                                        </p:selectOneButton>
+                                    </p:column>
+                                </p:row>
+                                <p:row >
+                                    <p:column >
+                                        <p:outputLabel value="D" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <p:outputLabel value="Residential Address" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column colspan="3" >
+                                        <p:inputText value="#{caseRecordController.selected.residentialAddress}" ></p:inputText>
+                                    </p:column>
+                                </p:row>
+
+                                <p:row >
+                                    <p:column >
+                                        <p:outputLabel value="E" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <p:outputLabel value="Area" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column  >
+                                        <p:outputLabel value="RDHS" ></p:outputLabel>
+                                        <p:autoComplete value="#{caseRecordController.selected.rdhsArea}" completeMethod="#{areaController.rdhsAreas}"
+                                                        var="d" itemLabel="#{d.name}" itemValue="#{d}"  >
+                                            <p:ajax process="@this" ></p:ajax>
+                                        </p:autoComplete>
+                                    </p:column>
+                                    <p:column  >
+                                        <p:outputLabel value="MOH" ></p:outputLabel>
+                                        <p:autoComplete value="#{caseRecordController.selected.rdhsArea}" completeMethod="#{caseRecordController.selectedMohAreas}"
+                                                        var="m" itemLabel="#{m.name}" itemValue="#{m}" >
+                                            <p:ajax process="@this" ></p:ajax>
+                                        </p:autoComplete>
+                                    </p:column>
+                                    <p:column  >
+                                        <p:outputLabel value="PHM" ></p:outputLabel>
+                                        <p:autoComplete value="#{caseRecordController.selected.rdhsArea}" completeMethod="#{caseRecordController.selectedPhmAreas}"
+                                                        var="p" itemLabel="#{p.name}" itemValue="#{p}" ></p:autoComplete>
+                                    </p:column>
+                                </p:row>
+
+                            </p:panelGrid>
+
+
+
+                        </p:panel>
+                    </h:form>
+                </f:view>
+
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

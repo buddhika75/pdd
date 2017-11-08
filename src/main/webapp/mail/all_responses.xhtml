@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template.xhtml">
+
+            <ui:define name="body">
+
+                <p:panel >
+
+                    <f:view>
+
+
+                        <h:form>
+                            
+                            <p:panelGrid columns="2" >
+                                <p:outputLabel value="From" ></p:outputLabel>
+                                <p:calendar pattern="dd MMMM yyyy" value="#{mailController.fromDate}" ></p:calendar>
+                                <p:outputLabel value="To" ></p:outputLabel>
+                                <p:calendar pattern="dd MMMM yyyy" value="#{mailController.toDate}" ></p:calendar>
+                                <p:spacer ></p:spacer>
+                                <h:panelGroup >
+                                    <p:commandButton value="Process" action="#{mailController.fillItemsByPeriod()}" ajax="false" ></p:commandButton>
+                                    <p:commandButton value="Excel" ajax="false" >
+                                        <p:dataExporter target="tbl" type="xls" fileName="list" ></p:dataExporter>
+                                    </p:commandButton>
+                                </h:panelGroup>
+                                
+                            </p:panelGrid>
+                            
+                            <p:dataTable id="tbl" value="#{mailController.selectedItems}" var="item">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Position"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.position.name}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Sex"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.sex}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Age"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.age}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Service Period"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.servicePeriod}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Institution Service Period"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.institutionServicePeriod}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Place"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.place}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Increments"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.increments}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Environment"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.environment}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Clineliness"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.clineliness}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Arrangement"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.arrangement}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="GroupWork"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.groupWork}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Leadership"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.leadership}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Training"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.training}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Evaluation"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.evaluation}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Wellfare"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.wellfare}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Decpline"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.decpline}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Communication"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.communication}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Discussions"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.discussions}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Requirement_Identification"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.requirement_Identification}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Quality_service"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.quality_service}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Expectation_achievement"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.expectation_achievement}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Suggestions"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.suggestions}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="ExpectingFacilities"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.expectingFacilities}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </f:view>
+
+                </p:panel>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

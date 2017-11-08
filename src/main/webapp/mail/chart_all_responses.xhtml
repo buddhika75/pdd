@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template.xhtml">
+
+            <ui:define name="body">
+
+                <p:panel >
+
+                    <f:view>
+
+
+                        <h:form>
+
+                            <p:panelGrid columns="2" >
+                                <p:outputLabel value="From" ></p:outputLabel>
+                                <p:calendar pattern="dd MMMM yyyy" value="#{mailController.fromDate}" ></p:calendar>
+                                <p:outputLabel value="To" ></p:outputLabel>
+                                <p:calendar pattern="dd MMMM yyyy" value="#{mailController.toDate}" ></p:calendar>
+                                <p:spacer ></p:spacer>
+                                <h:panelGroup >
+                                    <p:commandButton value="Process" action="#{mailController.drawAllCategoryResponses() }" ajax="false" ></p:commandButton>
+                                    <p:commandButton value="Excel" ajax="false" >
+                                        <p:dataExporter target="tbl" type="xls" fileName="list" ></p:dataExporter>
+                                    </p:commandButton>
+                                </h:panelGroup>
+
+                            </p:panelGrid>
+
+                            <h:panelGrid columns="1" >
+                                <p:chart rendered="#{mailController.barModel ne null}" type="bar" widgetVar="browserChart" model="#{mailController.barModel}" style="width: 95%;"  />
+                                <p:dataTable id="tbl" value="#{mailController.responseData}" var="item">
+                                    <p:column  style="width: 150px;" >
+                                        <f:facet name="header">
+                                            <h:outputText value="Question"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.category}"/>
+                                    </p:column>
+                                    <p:column style="width: 50px;" >
+                                        <f:facet name="header">
+                                            <h:outputText value="Excellent"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.excellentNumber}"/>
+                                    </p:column>
+                                    <p:column  style="width: 50px;" >
+                                        <f:facet name="header">
+                                            <h:outputText value="Good"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.goodNumber}"/>
+                                    </p:column>
+                                    <p:column  style="width: 50px;" >
+                                        <f:facet name="header">
+                                            <h:outputText value="Average"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.averageNumber}"/>
+                                    </p:column>
+                                    <p:column  style="width: 50px;" >
+                                        <f:facet name="header">
+                                            <h:outputText value="Poor"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.poorNumber}"/>
+                                    </p:column>
+                                    <p:column  style="width: 50px;" >
+                                        <f:facet name="header">
+                                            <h:outputText value="Worst"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.worstNumber}"/>
+                                    </p:column>
+                                    <p:column  style="width: 50px;" >
+                                        <f:facet name="header">
+                                            <h:outputText value="No Response"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.noResponseNumber}"/>
+                                    </p:column>
+
+
+
+                                </p:dataTable>
+
+                            </h:panelGrid>
+                        </h:form>
+
+
+
+                    </f:view>
+
+                </p:panel>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

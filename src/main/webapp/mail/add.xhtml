@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="/template.xhtml">
+
+            <ui:define name="body">
+
+                <p:panel >
+                    <h:form id="MailCreateForm">
+                        <h:panelGroup id="display">
+                            <h:panelGrid columns="19" rendered="#{mailController.selected ne null}">
+                                <p:outputLabel value="Position:" for="position" />
+                                <p:selectOneMenu id="position" value="#{mailController.selected.position}"  >
+                                    <f:selectItem itemLabel="Select a Postion" ></f:selectItem>
+                                    <f:selectItems value="#{itemController.itemsAvailableSelectOne}" var="p" itemValue="#{p}" itemLabel="#{p.name}"/>
+                                </p:selectOneMenu>
+                                <p:spacer height="1" width="2" ></p:spacer>
+                                <p:outputLabel value="Sex:" for="sex" />
+                                <p:selectOneMenu  id="sex" value="#{mailController.selected.sex}" >
+                                    <f:selectItem itemLabel="Select a Sex" ></f:selectItem>
+                                    <f:selectItems value="#{enumController.sexes}"/>
+                                </p:selectOneMenu>
+                                <p:spacer height="1" width="2" ></p:spacer>
+                                <p:outputLabel value="Age:" for="age" />
+                                <p:inputText id="age" value="#{mailController.selected.age}" title="Age" style="width: 50px;"/>
+                                <p:spacer height="1" width="2" ></p:spacer>
+                                <p:outputLabel value="ServicePeriod:" for="servicePeriod" />
+                                <p:inputText id="servicePeriod" value="#{mailController.selected.servicePeriod}" style="width: 50px;" title="ServicePeriod" />
+                                <p:spacer height="1" width="2" ></p:spacer>
+                                <p:outputLabel value="InstitutionServicePeriod:" for="institutionServicePeriod" />
+                                <p:inputText id="institutionServicePeriod" style="width: 50px;" value="#{mailController.selected.institutionServicePeriod}" title="InstitutionServicePeriod" />
+                                <p:spacer height="1" width="2" ></p:spacer>
+                                <p:outputLabel value="QuestionnaireDate:" for="questionnaireDate" />
+                                <p:calendar id="questionnaireDate" value="#{mailController.selected.questionnaireDate}" title="QuestionnaireDate"  pattern="MM/dd/yyyy" >
+                                </p:calendar>
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="5" >
+                                <p:outputLabel value="Place:" for="place" />
+                                <p:selectOneButton id="place" value="#{mailController.selected.place}" >
+                                    <f:selectItems value="#{enumController.places}"/>
+                                </p:selectOneButton>
+                                <p:spacer height="1" width="2" ></p:spacer>
+                                <p:outputLabel value="Increments:" for="increments" />
+                                <p:selectOneButton id="increments" value="#{mailController.selected.increments}" >
+                                    <f:selectItems value="#{enumController.responses}"/>
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="Environment:" for="environment" />
+                                <p:selectOneButton id="environment" value="#{mailController.selected.environment}" >
+                                    <f:selectItems value="#{enumController.responses}"/>
+                                </p:selectOneButton>
+                                <p:spacer height="1" width="2" ></p:spacer>
+                                <p:outputLabel value="Clineliness:" for="clineliness" />
+                                <p:selectOneButton id="clineliness" value="#{mailController.selected.clineliness}" >
+                                    <f:selectItems value="#{enumController.responses}"/>
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="Arrangement:" for="arrangement" />
+                                <p:selectOneButton id="arrangement" value="#{mailController.selected.arrangement}" >
+                                    <f:selectItems value="#{enumController.responses}"/>
+                                </p:selectOneButton>
+                                <p:spacer height="1" width="2" ></p:spacer>
+                                <p:outputLabel value="GroupWork:" for="groupWork" />
+                                <p:selectOneButton id="groupWork" value="#{mailController.selected.groupWork}" >
+                                    <f:selectItems value="#{enumController.responses}"/>
+                                </p:selectOneButton>
+
+
+                                <p:outputLabel value="Leadership:" for="leadership" />
+                                <p:selectOneButton id="leadership" value="#{mailController.selected.leadership}" >
+                                    <f:selectItems value="#{enumController.responses}"/>
+                                </p:selectOneButton>
+                                <p:spacer height="1" width="2" ></p:spacer>
+                                <p:outputLabel value="Training:" for="training" />
+                                <p:selectOneButton id="training" value="#{mailController.selected.training}" >
+                                    <f:selectItems value="#{enumController.responses}"/>
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="Evaluation:" for="evaluation" />
+                                <p:selectOneButton id="evaluation" value="#{mailController.selected.evaluation}" >
+                                    <f:selectItems value="#{enumController.responses}"/>
+                                </p:selectOneButton>
+                                <p:spacer height="1" width="2" ></p:spacer>
+                                <p:outputLabel value="Wellfare:" for="wellfare" />
+                                <p:selectOneButton id="wellfare" value="#{mailController.selected.wellfare}" >
+                                    <f:selectItems value="#{enumController.responses}"/>
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="Decpline:" for="decpline" />
+                                <p:selectOneButton id="decpline" value="#{mailController.selected.decpline}" >
+                                    <f:selectItems value="#{enumController.responses}"/>
+                                </p:selectOneButton>
+                                <p:spacer height="1" width="2" ></p:spacer>
+                                <p:outputLabel value="Communication:" for="communication" />
+                                <p:selectOneButton id="communication" value="#{mailController.selected.communication}" >
+                                    <f:selectItems value="#{enumController.responses}"/>
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="Discussions:" for="discussions" />
+                                <p:selectOneButton id="discussions" value="#{mailController.selected.discussions}" >
+                                    <f:selectItems value="#{enumController.responses}"/>
+                                </p:selectOneButton>
+                                <p:spacer height="1" width="2" ></p:spacer>
+                                <p:outputLabel value="Requirement_Identification:" for="requirement_Identification" />
+                                <p:selectOneButton id="requirement_Identification" value="#{mailController.selected.requirement_Identification}" >
+                                    <f:selectItems value="#{enumController.responses}"/>
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="Quality_service:" for="quality_service" />
+                                <p:selectOneButton id="quality_service" value="#{mailController.selected.quality_service}" >
+                                    <f:selectItems value="#{enumController.responses}"/>
+                                </p:selectOneButton>
+                                <p:spacer height="1" width="2" ></p:spacer>
+                                <p:outputLabel value="Expectation_achievement:" for="expectation_achievement" />
+                                <p:selectOneButton id="expectation_achievement" value="#{mailController.selected.expectation_achievement}" >
+                                    <f:selectItems value="#{enumController.responses}"/>
+                                </p:selectOneButton>
+
+
+                                <p:outputLabel value="Suggestions:" for="suggestions" />
+                                <p:inputTextarea rows="4" cols="50" id="suggestions" value="#{mailController.selected.suggestions}" title="Suggestions" />
+                                <p:spacer height="1" width="2" ></p:spacer>
+                                <p:outputLabel value="ExpectingFacilities:" for="expectingFacilities" />
+                                <p:inputTextarea rows="4" cols="50" id="expectingFacilities" value="#{mailController.selected.expectingFacilities}" title="ExpectingFacilities" />
+                            </h:panelGrid>
+
+                            <p:commandButton action="#{mailController.saveAddNew()}" value="#{bundle.Save}" ajax="false"/>
+                            <p:commandButton value="#{bundle.Cancel}" action="#{mailController.toAddNew()}" ajax="false"/>
+                            
+                        </h:panelGroup>
+                    </h:form>
+                </p:panel>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

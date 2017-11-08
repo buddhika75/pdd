@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MailViewDlg" widgetVar="MailViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMailTitle}">
+         
+            
+
+                <h:form id="MailViewForm">
+                    <h1><h:outputText value="View"/></h1>
+                    <p:panelGrid columns="2">
+                        <h:outputText value="Place:"/>
+                        <h:outputText value="#{mailController.selected.place}" title="Place"/>
+                        <h:outputText value="Position:"/>
+                        <h:outputText value="#{mailController.selected.position.name}" title="Position"/>
+                        <h:outputText value="Sex:"/>
+                        <h:outputText value="#{mailController.selected.sex}" title="Sex"/>
+                        <h:outputText value="Age:"/>
+                        <h:outputText value="#{mailController.selected.age}" title="Age"/>
+                        <h:outputText value="ServicePeriod:"/>
+                        <h:outputText value="#{mailController.selected.servicePeriod}" title="ServicePeriod"/>
+                        <h:outputText value="InstitutionServicePeriod:"/>
+                        <h:outputText value="#{mailController.selected.institutionServicePeriod}" title="InstitutionServicePeriod"/>
+                        <h:outputText value="Increments:"/>
+                        <h:outputText value="#{mailController.selected.increments}" title="Increments"/>
+                        <h:outputText value="Environment:"/>
+                        <h:outputText value="#{mailController.selected.environment}" title="Environment"/>
+                        <h:outputText value="Clineliness:"/>
+                        <h:outputText value="#{mailController.selected.clineliness}" title="Clineliness"/>
+                        <h:outputText value="Arrangement:"/>
+                        <h:outputText value="#{mailController.selected.arrangement}" title="Arrangement"/>
+                        <h:outputText value="GroupWork:"/>
+                        <h:outputText value="#{mailController.selected.groupWork}" title="GroupWork"/>
+                        <h:outputText value="Leadership:"/>
+                        <h:outputText value="#{mailController.selected.leadership}" title="Leadership"/>
+                        <h:outputText value="Training:"/>
+                        <h:outputText value="#{mailController.selected.training}" title="Training"/>
+                        <h:outputText value="Evaluation:"/>
+                        <h:outputText value="#{mailController.selected.evaluation}" title="Evaluation"/>
+                        <h:outputText value="Wellfare:"/>
+                        <h:outputText value="#{mailController.selected.wellfare}" title="Wellfare"/>
+                        <h:outputText value="Decpline:"/>
+                        <h:outputText value="#{mailController.selected.decpline}" title="Decpline"/>
+                        <h:outputText value="Communication:"/>
+                        <h:outputText value="#{mailController.selected.communication}" title="Communication"/>
+                        <h:outputText value="Discussions:"/>
+                        <h:outputText value="#{mailController.selected.discussions}" title="Discussions"/>
+                        <h:outputText value="Requirement_Identification:"/>
+                        <h:outputText value="#{mailController.selected.requirement_Identification}" title="Requirement_Identification"/>
+                        <h:outputText value="Quality_service:"/>
+                        <h:outputText value="#{mailController.selected.quality_service}" title="Quality_service"/>
+                        <h:outputText value="Expectation_achievement:"/>
+                        <h:outputText value="#{mailController.selected.expectation_achievement}" title="Expectation_achievement"/>
+                        <h:outputText value="Suggestions:"/>
+                        <h:outputText value="#{mailController.selected.suggestions}" title="Suggestions"/>
+                        <h:outputText value="ExpectingFacilities:"/>
+                        <h:outputText value="#{mailController.selected.expectingFacilities}" title="ExpectingFacilities"/>
+                        <h:outputText value="QuestionnaireDate:"/>
+                        <h:outputText value="#{mailController.selected.questionnaireDate}" title="QuestionnaireDate">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="CreatedDate:"/>
+                        <h:outputText value="#{mailController.selected.createdDate}" title="CreatedDate">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="AddedUser:"/>
+                        <h:outputText value="#{mailController.selected.addedUser.name}" title="AddedUser"/>
+                        <h:outputText value="AddedDate:"/>
+                        <h:outputText value="#{mailController.selected.addedDate}" title="AddedDate">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="AddedTime:"/>
+                        <h:outputText value="#{mailController.selected.addedTime}" title="AddedTime">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:panelGrid>
+                </h:form>
+          
+
+            
+            
+        </p:dialog>
+
+    </ui:composition>
+</html>

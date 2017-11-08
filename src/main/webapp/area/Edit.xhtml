@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AreaEditDlg" widgetVar="AreaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleArea.EditAreaTitle}">
+            <h:form id="AreaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{areaController.selected != null}">
+                        <p:outputLabel value="#{bundleArea.EditAreaLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{areaController.selected.name}" title="#{bundleArea.EditAreaTitle_name}" />
+                        <p:outputLabel value="#{bundleArea.EditAreaLabel_areaType}" for="areaType" />
+                        <p:inputText id="areaType" value="#{areaController.selected.areaType}" title="#{bundleArea.EditAreaTitle_areaType}" />
+                        <p:outputLabel value="#{bundleArea.EditAreaLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{areaController.selected.id}" title="#{bundleArea.EditAreaTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{areaController.update}" value="#{bundleArea.Save}" update="display,:AreaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AreaEditDialog');"/>
+                    <p:commandButton value="#{bundleArea.Cancel}" onclick="AreaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
