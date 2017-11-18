@@ -38,6 +38,12 @@ public class CaseRecordController implements Serializable {
     private List<CaseRecord> items = null;
     private CaseRecord selected;
 
+    
+    public String addNewCase(){
+        selected = new CaseRecord();
+        return "/caseRecord/caseRecord";
+    }
+    
     public AreaController getAreaController() {
         return areaController;
     }
@@ -78,7 +84,7 @@ public class CaseRecordController implements Serializable {
         return "/caseRecord/caseRecord";
     }
 
-    public String savePatient() {
+    public String saveCase() {
         if (selected == null) {
             JsfUtil.addErrorMessage("Nothing to save");
             return "";

@@ -24,23 +24,22 @@
                             <f:facet name="header" >
                                 <p:outputLabel value="Perinatal Death Documentation Format" ></p:outputLabel>
                             </f:facet>
-                            <p:panelGrid  >
+                            <p:panelGrid styleClass="alignTop" >
                                 <p:row >
-                                    <p:column colspan="2">
+                                    <p:column colspan="3">
                                         <p:outputLabel value="Hospital" ></p:outputLabel>
                                         <p:outputLabel value="#{caseRecordController.selected.createInstitute.name}" ></p:outputLabel>
                                     </p:column>
                                     <p:column colspan="2" >
+                                        <p:commandButton value="Save" action="#{caseRecordController.saveCase()}" ajax="false" ></p:commandButton>
                                     </p:column>
-                                    <p:column colspan="2">
+                                    <p:column colspan="3">
                                         <p:outputLabel value="Unit" ></p:outputLabel>
                                         <p:outputLabel value="#{caseRecordController.selected.createdDepartment.name}"></p:outputLabel>
                                     </p:column>
                                 </p:row>
-                            </p:panelGrid>
-                            <p:panelGrid >
                                 <p:row >
-                                    <p:column colspan="4" >
+                                    <p:column colspan="7" >
                                         <p:outputLabel value="Summery Sheet" ></p:outputLabel>
                                     </p:column>
                                 </p:row>
@@ -55,9 +54,13 @@
                                         <p:outputLabel value="Mother" ></p:outputLabel>
                                         <p:inputText value="#{caseRecordController.selected.mothersNumber}" ></p:inputText>
                                     </p:column>
+                                    <p:column ></p:column>
                                     <p:column >
                                         <p:outputLabel value="Baby" ></p:outputLabel>
                                         <p:inputText value="#{caseRecordController.selected.babysNumber}" ></p:inputText>
+                                    </p:column>
+                                    <p:column >
+
                                     </p:column>
                                 </p:row>
                                 <p:row >
@@ -67,9 +70,8 @@
                                     <p:column >
                                         <p:outputLabel value="Name of Mother / Baby" ></p:outputLabel>
                                     </p:column>
-                                    <p:column colspan="2" >
-                                        <p:outputLabel value="Mother" ></p:outputLabel>
-                                        <p:inputText value="#{caseRecordController.selected.nameOfCase}" ></p:inputText>
+                                    <p:column colspan="5" >
+                                        <p:inputText style="width: 90%;" value="#{caseRecordController.selected.nameOfCase}" ></p:inputText>
                                     </p:column>
                                 </p:row>
                                 <p:row >
@@ -79,7 +81,7 @@
                                     <p:column >
                                         <p:outputLabel value="Ethnicity of Mother" ></p:outputLabel>
                                     </p:column>
-                                    <p:column colspan="3" >
+                                    <p:column colspan="5" >
                                         <p:selectOneButton value="#{caseRecordController.selected.ethnicity}" >
                                             <f:selectItems value="#{enumController.ethnicities}" ></f:selectItems>
                                         </p:selectOneButton>
@@ -92,8 +94,8 @@
                                     <p:column >
                                         <p:outputLabel value="Residential Address" ></p:outputLabel>
                                     </p:column>
-                                    <p:column colspan="3" >
-                                        <p:inputText value="#{caseRecordController.selected.residentialAddress}" ></p:inputText>
+                                    <p:column colspan="4" >
+                                        <p:inputTextarea style="width: 90%;" value="#{caseRecordController.selected.residentialAddress}" ></p:inputTextarea>
                                     </p:column>
                                 </p:row>
 
@@ -107,24 +109,509 @@
                                     <p:column  >
                                         <p:outputLabel value="RDHS" ></p:outputLabel>
                                         <p:autoComplete value="#{caseRecordController.selected.rdhsArea}" completeMethod="#{areaController.rdhsAreas}"
-                                                        var="d" itemLabel="#{d.name}" itemValue="#{d}"  >
+                                                        var="d" itemLabel="#{d.name}" itemValue="#{d}" forceSelection="true" >
                                             <p:ajax process="@this" ></p:ajax>
                                         </p:autoComplete>
                                     </p:column>
+                                    <p:column ></p:column>
                                     <p:column  >
                                         <p:outputLabel value="MOH" ></p:outputLabel>
                                         <p:autoComplete value="#{caseRecordController.selected.rdhsArea}" completeMethod="#{caseRecordController.selectedMohAreas}"
-                                                        var="m" itemLabel="#{m.name}" itemValue="#{m}" >
+                                                        var="m" itemLabel="#{m.name}" itemValue="#{m}" forceSelection="true"  >
                                             <p:ajax process="@this" ></p:ajax>
                                         </p:autoComplete>
                                     </p:column>
                                     <p:column  >
                                         <p:outputLabel value="PHM" ></p:outputLabel>
                                         <p:autoComplete value="#{caseRecordController.selected.rdhsArea}" completeMethod="#{caseRecordController.selectedPhmAreas}"
-                                                        var="p" itemLabel="#{p.name}" itemValue="#{p}" ></p:autoComplete>
+                                                        forceSelection="true"     var="p" itemLabel="#{p.name}" itemValue="#{p}" ></p:autoComplete>
                                     </p:column>
                                 </p:row>
 
+                                <p:row >
+                                    <p:column >
+                                        <p:outputLabel value="F" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <p:outputLabel value="Age of Mother" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <p:inputText value="#{caseRecordController.selected.mothersAge}" ></p:inputText>
+                                        <p:outputLabel value="Years" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+
+                                    </p:column>
+                                    <p:column >
+                                        <p:outputLabel value="NIC" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <p:inputText value="#{caseRecordController.selected.mothersNic}" ></p:inputText>
+                                    </p:column>
+                                </p:row>
+                                <p:row >
+                                    <p:column >
+                                        <p:outputLabel value="G" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <p:outputLabel value="Type of Perinatal Death" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <p:selectOneButton value="#{caseRecordController.selected.caseType}" >
+                                            <f:selectItems value="#{enumController.caseTypes}" ></f:selectItems>
+                                        </p:selectOneButton>
+                                    </p:column>
+                                    <p:column >
+
+                                    </p:column>
+                                    <p:column >
+                                        <p:outputLabel value="Contact Phones" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <p:inputText value="#{caseRecordController.selected.contactNumbers}" ></p:inputText>
+                                    </p:column>
+                                </p:row>
+
+                                <p:row >
+                                    <p:column >
+                                        <p:outputLabel value="H" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <p:outputLabel value="Gravida" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <h:panelGrid columns="8" >
+                                            <p:outputLabel value="G" ></p:outputLabel>
+                                            <p:inputText style="width: 20px;" value="#{caseRecordController.selected.g}" ></p:inputText>
+                                            <p:spacer ></p:spacer>
+                                            <p:outputLabel value="P" ></p:outputLabel>
+                                            <p:inputText style="width: 20px;"  value="#{caseRecordController.selected.p}" ></p:inputText>
+                                            <p:spacer ></p:spacer>
+                                            <p:outputLabel value="C" ></p:outputLabel>
+                                            <p:inputText  style="width: 20px;" value="#{caseRecordController.selected.c}" ></p:inputText>
+                                        </h:panelGrid>
+
+                                    </p:column>
+                                    <p:column >
+
+                                    </p:column>
+                                    <p:column >
+                                        <p:outputLabel value="I. Parity" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <h:panelGrid columns="18" >
+                                            <p:outputLabel value="I." ></p:outputLabel>
+                                            <p:spacer height="1" width="1" ></p:spacer>
+                                            <p:outputLabel value="Parity" ></p:outputLabel>
+                                            <p:inputText style="width: 20px;" value="#{caseRecordController.selected.parity}" ></p:inputText>
+                                            <p:outputLabel value="|"></p:outputLabel>
+                                            <p:spacer ></p:spacer>
+                                            <p:outputLabel value="T" ></p:outputLabel>
+                                            <p:inputText style="width: 20px;"  value="#{caseRecordController.selected.parityT}" ></p:inputText>
+                                            <p:spacer ></p:spacer>
+                                            <p:outputLabel value="P" ></p:outputLabel>
+                                            <p:inputText style="width: 20px;"  value="#{caseRecordController.selected.parityP}" ></p:inputText>
+                                            <p:spacer ></p:spacer>
+                                            <p:outputLabel value="A" ></p:outputLabel>
+                                            <p:inputText  style="width: 20px;" value="#{caseRecordController.selected.parityA}" ></p:inputText>
+                                            <p:spacer ></p:spacer>
+                                            <p:outputLabel value="L" ></p:outputLabel>
+                                            <p:inputText  style="width: 20px;" value="#{caseRecordController.selected.parityL}" ></p:inputText>
+
+                                        </h:panelGrid>  
+                                    </p:column>
+                                </p:row>
+                                <p:row >
+                                    <p:column >
+                                        <p:outputLabel value="J" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <p:outputLabel value="Type of Pregnancy" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <p:selectOneButton value="#{caseRecordController.selected.typeOfPregnancy}" >
+                                            <f:selectItems value="#{enumController.typesOfPregnancy}" ></f:selectItems>
+                                        </p:selectOneButton>
+                                    </p:column>
+                                    <p:column >
+
+                                    </p:column>
+                                    <p:column >
+                                        <p:outputLabel value="K. Date of Delivery/Birth" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <p:calendar value="#{caseRecordController.selected.dateOfDeliveryOrBirth}"
+                                                    navigator="true" pattern="dd MMMM yyyy" >
+                                        </p:calendar>
+                                    </p:column>
+                                </p:row>
+
+                                <p:row >
+                                    <p:column >
+                                        <p:outputLabel value="L" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <p:outputLabel value="Place of Delivary" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <p:selectOneButton value="#{caseRecordController.selected.placeOfDelivery}" >
+                                            <f:selectItems value="#{enumController.placesOfDelivary}" ></f:selectItems>
+                                        </p:selectOneButton>
+                                    </p:column>
+                                    <p:column >
+
+                                    </p:column>
+                                    <p:column >
+                                        <p:outputLabel value="M. Time of Delivary" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <p:calendar value="#{caseRecordController.selected.timeOfDelivery}" timeOnly="true" pattern="hh:mm a"></p:calendar>
+                                    </p:column>
+                                </p:row>
+
+                                <p:row >
+                                    <p:column >
+                                        <p:outputLabel value="N" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <p:outputLabel value="Type of Delivary" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column colspan="6" >
+                                        <p:selectOneButton value="#{caseRecordController.selected.typeOfDelivery}" >
+                                            <f:selectItems value="#{enumController.typesOfDelivary}" ></f:selectItems>
+                                        </p:selectOneButton>
+                                    </p:column>
+                                </p:row>
+                                <p:row >
+                                    <p:column >
+                                        <p:outputLabel value="O" ></p:outputLabel>
+                                    </p:column>
+
+                                    <p:column >
+                                        <p:outputLabel value="POG at Birth" ></p:outputLabel>
+                                    </p:column>
+
+                                    <p:column >
+                                        <h:panelGrid columns="5" >
+                                            <p:inputText  style="width: 20px;" value="#{caseRecordController.selected.pogWeeks}" ></p:inputText>
+                                            <p:outputLabel value= "Weeks" ></p:outputLabel>
+                                            <p:spacer height="1" width="5" ></p:spacer>
+                                            <p:outputLabel value= "Days" ></p:outputLabel>
+                                            <p:inputText  style="width: 20px;" value="#{caseRecordController.selected.pogDays}" ></p:inputText>
+
+                                        </h:panelGrid>
+                                    </p:column>
+                                    <p:column ></p:column>
+                                    <p:column colspan="4">
+                                        <p:outputLabel value= "P. Method of Assessment" ></p:outputLabel>
+                                        <p:selectOneButton value="#{caseRecordController.selected.methodOfAssessment}" >
+                                            <f:selectItems value="#{enumController.methodsOfAssessment}" ></f:selectItems>
+                                        </p:selectOneButton>
+
+                                    </p:column>
+                                </p:row>
+                                <p:row >
+                                    <p:column >
+                                        <p:outputLabel value="Q" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <p:outputLabel value= "Birth Weight" ></p:outputLabel>
+
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText  style="width: 40px;" value="#{caseRecordController.selected.birthWeight}" ></p:inputText>
+                                        <p:outputLabel value= "grams" ></p:outputLabel>
+
+                                    </p:column>
+                                    <p:column >
+
+                                    </p:column>
+                                    <p:column colspan="2">
+                                        <p:outputLabel value= "R. Sex" ></p:outputLabel>
+                                        <p:selectOneButton value="#{caseRecordController.selected.sex}" >
+                                            <f:selectItems value="#{enumController.sexes}" ></f:selectItems>
+                                        </p:selectOneButton>
+
+                                    </p:column>
+                                </p:row>
+                                <p:row >
+                                    <p:column >
+                                        <p:outputLabel value="P" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column colspan="3">
+                                        <p:outputLabel value= "Date of Death" ></p:outputLabel>
+                                        <p:calendar value="#{caseRecordController.selected.dateOfDeliveryOrBirth}"
+                                                    navigator="true" pattern="dd MMMM yyyy" >
+                                        </p:calendar>
+
+                                    </p:column>
+                                    <p:column colspan="3">
+
+                                        <p:outputLabel value= "Age at Date (For ENND)" ></p:outputLabel>
+                                        <p:spacer height="1" width="5" ></p:spacer>
+                                        <p:inputText value="#{caseRecordController.selected.ageOfDeathDays}" style="width: 60px;" ></p:inputText>
+                                        <p:outputLabel value= "days" ></p:outputLabel>
+                                        <p:spacer height="1" width="5" ></p:spacer>
+                                        <p:inputText value="#{caseRecordController.selected.ageOfDeathHours}" style="width: 60px;" ></p:inputText>
+                                        <p:outputLabel value= "hours" ></p:outputLabel>
+
+
+                                    </p:column>
+                                </p:row>
+                                <p:row >
+                                    <p:column >
+                                        <p:outputLabel value="U" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column colspan="2">
+                                        <p:outputLabel value= "Timming of Death" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column colspan="4">
+                                        <p:selectOneButton value="#{caseRecordController.selected.timingOfDeath}" >
+                                            <f:selectItems value="#{enumController.timingOfDeaths}" ></f:selectItems>
+                                        </p:selectOneButton>
+                                    </p:column>
+                                </p:row>
+
+                                <p:row >
+                                    <p:column >
+                                        <p:outputLabel value="U" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column colspan="3">
+                                        <p:outputLabel value= "ICD-PM Group" ></p:outputLabel> <br/>
+                                        <p:outputLabel value= "The group of" ></p:outputLabel> <br/>
+                                        <p:outputLabel value= "Main Disease or" ></p:outputLabel> <br/>
+                                        <p:outputLabel value= "condition that" ></p:outputLabel> <br/>
+                                        <p:outputLabel value= "led to death in" ></p:outputLabel> <br/>
+                                        <p:outputLabel value= "fetus or infant." ></p:outputLabel>
+                                    </p:column>
+                                    <p:column colspan="1">
+                                        <p:panel header="Antepartum" >
+                                            <h:panelGrid >
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.a1}" label="Congenital Malformations and Chromosomal Abnormalities" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Congenital Malformations and Chromosomal Abnormalities" ></p:outputLabel>
+                                                </h:panelGroup>
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.a2}"  label="Infection" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Infection" ></p:outputLabel>
+                                                </h:panelGroup>
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.a3}"  label="Antepartum Hypoxia" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Antepartum Hypoxia" ></p:outputLabel>
+                                                </h:panelGroup>
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.a4}"  label="Other specific antepartum disorder" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Other specific antepartum disorder" ></p:outputLabel>
+                                                </h:panelGroup>
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.a5}"  label="Disorders related to foetal growth" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Disorders related to foetal growth" ></p:outputLabel>
+                                                </h:panelGroup>
+                                                <h:panelGroup > 
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.a6}"  label="Foetal Death of unspecified cause" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Foetal Death of unspecified cause" ></p:outputLabel>
+                                                </h:panelGroup>
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.auc}"  label="Unable to classify" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Unable to classify" ></p:outputLabel>
+                                                </h:panelGroup>
+                                            </h:panelGrid>
+                                        </p:panel>
+                                    </p:column>
+                                    <p:column colspan="1">
+                                        <p:panel header="Intrapartum" >
+                                            <h:panelGrid >
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.i1}" label="Congenital malformations or chromosomal abnormalities" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Congenital malformations or chromosomal abnormalities" ></p:outputLabel>
+                                                </h:panelGroup>
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.i2}"  label="Birth trauma" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Birth trauma" ></p:outputLabel>
+                                                </h:panelGroup>
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.i3}"  label="Acute Intrapartum Event" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Acute Intrapartum Event" ></p:outputLabel>
+                                                </h:panelGroup>
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.i4}"  label="Infection" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Infection" ></p:outputLabel>
+                                                </h:panelGroup>
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.i5}"  label="Other specified intrapartum disorder" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Other specified intrapartum disorder" ></p:outputLabel>
+                                                </h:panelGroup>
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.i6}"  label="Disorders related to foetal growth" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Disorders related to foetal growth" ></p:outputLabel>
+                                                </h:panelGroup>
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.i7}"  label="Intrapartum death of unspecified cause" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Intrapartum death of unspecified cause" ></p:outputLabel>
+                                                </h:panelGroup>
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.iuc}"  label="Unable to classify" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Unable to classify" ></p:outputLabel>
+                                                </h:panelGroup>
+                                            </h:panelGrid>
+                                        </p:panel>
+                                    </p:column>
+                                    <p:column colspan="1">
+                                        <p:panel header="Intrapartum" >
+                                            <h:panelGrid >
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.n1}" label="Congenital malformations or chromosomal abnormalities" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Congenital malformations or chromosomal abnormalities" ></p:outputLabel>
+                                                </h:panelGroup>
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.n2}"  label="Disorders related to foetal growth" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Disorders related to foetal growth" ></p:outputLabel>
+                                                </h:panelGroup>
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.n3}"  label="Birth trauma" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Birth trauma" ></p:outputLabel>
+                                                </h:panelGroup>
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.n4}"  label="Complications of Intrapartum events" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Complications of Intrapartum events" ></p:outputLabel>
+                                                </h:panelGroup>
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.n5}"  label="Convulsions and disorders of cerebral status" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Convulsions and disorders of cerebral status" ></p:outputLabel>
+                                                </h:panelGroup>
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.n7}"  label="Infection" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Infection" ></p:outputLabel>
+                                                </h:panelGroup>
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.n8}"  label="Respiratory and cardiovascular disorcers" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Respiratory and cardiovascular disorcers" ></p:outputLabel>
+                                                </h:panelGroup>
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.n9}"  label="Other neonatal conditions" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Other neonatal conditions" ></p:outputLabel>
+                                                </h:panelGroup>
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.n10}"  label="Miscellaneous" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Miscellaneous" ></p:outputLabel>
+                                                </h:panelGroup>
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.n11}"  label="Neonatal death of Unspecified cause" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Neonatal death of Unspecified cause" ></p:outputLabel>
+                                                </h:panelGroup>
+                                                <h:panelGroup >
+                                                    <p:selectBooleanCheckbox value="#{caseRecordController.selected.iuc}"  label="Unable to classify" ></p:selectBooleanCheckbox>
+                                                    <p:outputLabel value="Unable to classify" ></p:outputLabel>
+                                                </h:panelGroup>
+                                            </h:panelGrid>
+                                        </p:panel>
+                                    </p:column>
+                                </p:row>
+                                <p:row >
+                                    <p:column >
+                                        <p:outputLabel value="X" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <p:outputLabel value="Broad ICD-PM" ></p:outputLabel>
+                                        <br/>
+                                        <p:outputLabel value="Cause" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column colspan="6">
+                                        <p:inputTextarea value="#{caseRecordController.selected.broadIcdPm}" ></p:inputTextarea>
+                                    </p:column>
+                                </p:row>
+                                <p:row >
+                                    <p:column >
+                                        <p:outputLabel value="Y" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column >
+                                        <p:outputLabel value="ICD-Specific" ></p:outputLabel>
+                                        <br/>
+                                        <p:outputLabel value="Category" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column colspan="6" >
+                                        <p:inputTextarea value="#{caseRecordController.selected.icdSpecific}" style="width: 600px;"></p:inputTextarea>
+                                    </p:column>
+                                </p:row>
+                                <p:row >
+                                    <p:column colspan="7"  >
+                                        <p:outputLabel value="Maternal Conditions Contributing to Death" style="width: 600px;"></p:outputLabel>
+                                    </p:column>
+                                </p:row>
+                                <p:row >
+                                    <p:column colspan="1"  >
+                                        <p:outputLabel value="Y1" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column colspan="3"  >
+                                        <p:outputLabel value="ICD-PM Group" ></p:outputLabel>
+                                        <br/>
+                                        <p:outputLabel value="Main Maternal Disease or Condition" ></p:outputLabel>
+                                        <br/>
+                                        <p:outputLabel value="affecting fetus or infant" ></p:outputLabel>
+                                        <br/>
+                                    </p:column>
+                                    <p:column colspan="4"  >
+                                        <p:selectOneListbox value="#{caseRecordController.selected.maternalIcdPm}" >
+                                            <f:selectItem itemLabel="Select" ></f:selectItem>
+                                            <f:selectItems value="#{enumController.maternalIcdPms}" ></f:selectItems>
+                                        </p:selectOneListbox>
+                                    </p:column>
+                                </p:row>
+                                <p:row >
+                                    <p:column colspan="1"  >
+                                        <p:outputLabel value="Y2" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column colspan="3"  >
+                                        <p:outputLabel value="ICD-PM Specific Group" ></p:outputLabel>
+                                        <br/>
+                                        <p:outputLabel value="(Specific maternal condition/s" ></p:outputLabel>
+                                        <br/>
+                                        <p:outputLabel value="affecting fetus or infant)" ></p:outputLabel>
+                                        <br/>
+                                    </p:column>
+                                    <p:column colspan="4"  >
+                                        <p:inputTextarea value="#{caseRecordController.selected.maternalIcdPmSpecific}" style="width:300px;"></p:inputTextarea>
+                                    </p:column>
+                                </p:row>
+                                <p:row >
+                                    <p:column colspan="7"  >
+                                        <p:outputLabel value="Post-mortem Details" style="width: 600px;"></p:outputLabel>
+                                    </p:column>
+                                </p:row>
+                                <p:row >
+                                    <p:column colspan="1"  >
+                                        <p:outputLabel value="Y2" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column colspan="3"  >
+                                        <p:outputLabel value="Pathological/Forensic" ></p:outputLabel>
+                                        <br/>
+                                        <p:outputLabel value="Post-mortem" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column colspan="4"  >
+                                        <p:selectBooleanButton offLabel="Not Done" onLabel="Done" value="#{caseRecordController.selected.postMortemDone}"></p:selectBooleanButton>
+                                        <p:inputText placeholder="Record No." value="#{caseRecordController.selected.postMortemRecordNo}"></p:inputText>
+                                        <p:inputTextarea placeholder="Post-mortem Details" value="#{caseRecordController.selected.postMortemDetails}" style="width:300px;"></p:inputTextarea>
+                                    </p:column>
+                                </p:row>
+                                <p:row >
+                                    <p:column colspan="7"  >
+                                        <p:outputLabel value="Death Registration" style="width: 600px;"></p:outputLabel>
+                                    </p:column>
+                                </p:row>
+                                <p:row >
+                                    <p:column colspan="1"  >
+                                        <p:outputLabel value="Y2" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column colspan="3"  >
+                                        <p:outputLabel value="Certificate of Still Birth (B22) /" ></p:outputLabel>
+                                        <br/>
+                                        <p:outputLabel value="Declaration of Death (B33) Filled" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column colspan="4"  >
+                                        <p:selectBooleanButton offLabel="Not Filled" onLabel="Filled" value="#{caseRecordController.selected.b22b33Filled}"></p:selectBooleanButton>
+                                        <p:inputText placeholder="Death Certification No." value="#{caseRecordController.selected.deathCertificateNo}"></p:inputText>
+                                    </p:column>
+                                </p:row>
                             </p:panelGrid>
 
 

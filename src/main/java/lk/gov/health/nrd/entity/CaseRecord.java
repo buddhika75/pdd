@@ -17,11 +17,13 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import lk.gov.health.nrd.enums.CaseType;
+import lk.gov.health.nrd.enums.MaternalIcdPm;
 import lk.gov.health.nrd.enums.MethodOfAssessment;
 import lk.gov.health.nrd.enums.PlaceOfDelivery;
 import lk.gov.health.nrd.enums.PostMortemType;
 import lk.gov.health.nrd.enums.Sex;
 import lk.gov.health.nrd.enums.TimingOfDeath;
+import lk.gov.health.nrd.enums.TypeOfDelivery;
 import lk.gov.health.nrd.enums.TypeOfPregnancy;
 
 /**
@@ -68,7 +70,7 @@ public class CaseRecord implements Serializable {
     Integer parityT;
     Integer parityP;
     Integer parityA;
-    Integer patityL;
+    Integer parityL;
     @Enumerated(EnumType.STRING)
     TypeOfPregnancy typeOfPregnancy;
     Integer higherPregnancy;
@@ -83,16 +85,9 @@ public class CaseRecord implements Serializable {
     @ManyToOne
     Area placeOfDeliveryArea;
     String placeOfDeliveryString;
-
-    Boolean normalVagina;
-    Boolean breech;
-    Boolean forceps;
-    Boolean vaccum;
-    Boolean electiveCs;
-    Boolean emergencyCs;
-    Boolean hysterostomy;
-    Boolean laparotomyForRuptureUterus;
-    Boolean otherTypeOfDelivery;
+    @Enumerated(EnumType.STRING)
+    TypeOfDelivery typeOfDelivery;
+    
     String otherTypeOfDeliveryString;
     Integer pogWeeks;
     Integer pogDays;
@@ -129,16 +124,20 @@ public class CaseRecord implements Serializable {
     Boolean n5;
     Boolean n6;
     Boolean n7;
+     private Boolean n8;
+    private Boolean n9;
+    private Boolean n10;
+    private Boolean n11;
     Boolean nuc;
 
+    @Lob
     String broadIcdPm;
+    @Lob
     String icdSpecific;
 
-    Boolean m1;
-    Boolean m2;
-    Boolean m3;
-    Boolean m4;
-    Boolean m5;
+    @Enumerated
+    MaternalIcdPm maternalIcdPm;
+    @Lob
     String maternalIcdPmSpecific;
 
     @Enumerated(EnumType.STRING)
@@ -268,9 +267,6 @@ public class CaseRecord implements Serializable {
     public void setCreatedDepartment(Department createdDepartment) {
         this.createdDepartment = createdDepartment;
     }
-    
-    
-    
 
     public void setRdhsArea(Area rdhsArea) {
         this.rdhsArea = rdhsArea;
@@ -380,12 +376,12 @@ public class CaseRecord implements Serializable {
         this.parityA = parityA;
     }
 
-    public Integer getPatityL() {
-        return patityL;
+    public Integer getParityL() {
+        return parityL;
     }
 
-    public void setPatityL(Integer patityL) {
-        this.patityL = patityL;
+    public void setParityL(Integer parityL) {
+        this.parityL = parityL;
     }
 
     public TypeOfPregnancy getTypeOfPregnancy() {
@@ -452,77 +448,15 @@ public class CaseRecord implements Serializable {
         this.placeOfDeliveryString = placeOfDeliveryString;
     }
 
-    public Boolean getNormalVagina() {
-        return normalVagina;
+    public TypeOfDelivery getTypeOfDelivery() {
+        return typeOfDelivery;
     }
 
-    public void setNormalVagina(Boolean normalVagina) {
-        this.normalVagina = normalVagina;
+    public void setTypeOfDelivery(TypeOfDelivery typeOfDelivery) {
+        this.typeOfDelivery = typeOfDelivery;
     }
 
-    public Boolean getBreech() {
-        return breech;
-    }
-
-    public void setBreech(Boolean breech) {
-        this.breech = breech;
-    }
-
-    public Boolean getForceps() {
-        return forceps;
-    }
-
-    public void setForceps(Boolean forceps) {
-        this.forceps = forceps;
-    }
-
-    public Boolean getVaccum() {
-        return vaccum;
-    }
-
-    public void setVaccum(Boolean vaccum) {
-        this.vaccum = vaccum;
-    }
-
-    public Boolean getElectiveCs() {
-        return electiveCs;
-    }
-
-    public void setElectiveCs(Boolean electiveCs) {
-        this.electiveCs = electiveCs;
-    }
-
-    public Boolean getEmergencyCs() {
-        return emergencyCs;
-    }
-
-    public void setEmergencyCs(Boolean emergencyCs) {
-        this.emergencyCs = emergencyCs;
-    }
-
-    public Boolean getHysterostomy() {
-        return hysterostomy;
-    }
-
-    public void setHysterostomy(Boolean hysterostomy) {
-        this.hysterostomy = hysterostomy;
-    }
-
-    public Boolean getLaparotomyForRuptureUterus() {
-        return laparotomyForRuptureUterus;
-    }
-
-    public void setLaparotomyForRuptureUterus(Boolean laparotomyForRuptureUterus) {
-        this.laparotomyForRuptureUterus = laparotomyForRuptureUterus;
-    }
-
-    public Boolean getOtherTypeOfDelivery() {
-        return otherTypeOfDelivery;
-    }
-
-    public void setOtherTypeOfDelivery(Boolean otherTypeOfDelivery) {
-        this.otherTypeOfDelivery = otherTypeOfDelivery;
-    }
+    
 
     public String getOtherTypeOfDeliveryString() {
         return otherTypeOfDeliveryString;
@@ -804,45 +738,15 @@ public class CaseRecord implements Serializable {
         this.icdSpecific = icdSpecific;
     }
 
-    public Boolean getM1() {
-        return m1;
+    public MaternalIcdPm getMaternalIcdPm() {
+        return maternalIcdPm;
     }
 
-    public void setM1(Boolean m1) {
-        this.m1 = m1;
+    public void setMaternalIcdPm(MaternalIcdPm maternalIcdPm) {
+        this.maternalIcdPm = maternalIcdPm;
     }
 
-    public Boolean getM2() {
-        return m2;
-    }
-
-    public void setM2(Boolean m2) {
-        this.m2 = m2;
-    }
-
-    public Boolean getM3() {
-        return m3;
-    }
-
-    public void setM3(Boolean m3) {
-        this.m3 = m3;
-    }
-
-    public Boolean getM4() {
-        return m4;
-    }
-
-    public void setM4(Boolean m4) {
-        this.m4 = m4;
-    }
-
-    public Boolean getM5() {
-        return m5;
-    }
-
-    public void setM5(Boolean m5) {
-        this.m5 = m5;
-    }
+    
 
     public String getMaternalIcdPmSpecific() {
         return maternalIcdPmSpecific;
@@ -963,11 +867,9 @@ public class CaseRecord implements Serializable {
     public void setRetiredBy(WebUser retiredBy) {
         this.retiredBy = retiredBy;
     }
+    
+    
 
-    
-    
-    
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -991,6 +893,38 @@ public class CaseRecord implements Serializable {
     @Override
     public String toString() {
         return "lk.gov.health.nrd.entity.Patient[ id=" + id + " ]";
+    }
+
+    public Boolean getN8() {
+        return n8;
+    }
+
+    public void setN8(Boolean n8) {
+        this.n8 = n8;
+    }
+
+    public Boolean getN9() {
+        return n9;
+    }
+
+    public void setN9(Boolean n9) {
+        this.n9 = n9;
+    }
+
+    public Boolean getN10() {
+        return n10;
+    }
+
+    public void setN10(Boolean n10) {
+        this.n10 = n10;
+    }
+
+    public Boolean getN11() {
+        return n11;
+    }
+
+    public void setN11(Boolean n11) {
+        this.n11 = n11;
     }
 
 }

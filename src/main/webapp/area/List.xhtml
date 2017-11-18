@@ -39,12 +39,6 @@
                             </f:facet>
                             <h:outputText value="#{item.areaType}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundleArea.ListAreaTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundleArea.Create}" actionListener="#{areaController.prepareCreate}" update=":AreaCreateForm" oncomplete="PF('AreaCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundleArea.View}" update=":AreaViewForm" oncomplete="PF('AreaViewDialog').show()" disabled="#{empty areaController.selected}"/>
