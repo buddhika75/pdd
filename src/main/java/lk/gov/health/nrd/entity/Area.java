@@ -145,7 +145,7 @@ public class Area implements Serializable {
 
     @Override
     public String toString() {
-        return "lk.gov.health.nrd.entity.Area[ id=" + id + " ]";
+        return name;
     }
     
 }

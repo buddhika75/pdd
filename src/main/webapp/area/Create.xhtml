@@ -12,12 +12,52 @@
             <h:form id="AreaCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{areaController.selected != null}">
-                        <p:outputLabel value="#{bundleArea.CreateAreaLabel_name}" for="name" />
-                        <p:inputText id="name" value="#{areaController.selected.name}" title="#{bundleArea.CreateAreaTitle_name}" />
-                        <p:outputLabel value="#{bundleArea.CreateAreaLabel_areaType}" for="areaType" />
-                        <p:inputText id="areaType" value="#{areaController.selected.areaType}" title="#{bundleArea.CreateAreaTitle_areaType}" />
-                        <p:outputLabel value="#{bundleArea.CreateAreaLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{areaController.selected.id}" title="#{bundleArea.CreateAreaTitle_id}" />
+                        <p:outputLabel value="Name:" for="name" />
+                        <p:inputText id="name" value="#{areaController.selected.name}" title="Name" />
+
+                        <p:outputLabel value="AreaType:" for="areaType" />
+                        <p:selectOneMenu id="areaType" value="#{areaController.selected.areaType}" >
+                            <f:selectItem itemLabel="Select" ></f:selectItem>
+                            <f:selectItems value="#{enumController.areaTypes}" ></f:selectItems>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Province:" for="province" />
+                        <p:selectOneMenu id="province" value="#{areaController.selected.province}" >
+                            <f:selectItem itemLabel="Not Relevant" ></f:selectItem>
+                            <f:selectItems value="#{areaController.provinces}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="District:" for="district" />
+                        <p:selectOneMenu id="district" value="#{areaController.selected.district}" >
+                            <f:selectItem itemLabel="Not Relevant" ></f:selectItem>
+                            <f:selectItems value="#{areaController.districts}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Rdhs:" for="rdhs" />
+                        <p:selectOneMenu id="rdhs" value="#{areaController.selected.rdhs}" >
+                            <f:selectItem itemLabel="Not Relevant" ></f:selectItem>
+                            <f:selectItems value="#{areaController.rdhsAreas}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Moh:" for="moh" />
+                        <p:selectOneMenu id="moh" value="#{areaController.selected.moh}" >
+                            <f:selectItem itemLabel="Not Relevant" ></f:selectItem>
+                            <f:selectItems value="#{areaController.mohAreas}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Phi:" for="phi" />
+                        <p:selectOneMenu id="phi" value="#{areaController.selected.phi}" >
+                            <f:selectItem itemLabel="Not Relevant" ></f:selectItem>
+                            <f:selectItems value="#{areaController.phiAreas}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Phm:" for="phm" />
+                        <p:selectOneMenu id="phm" value="#{areaController.selected.phm}" >
+                            <f:selectItem itemLabel="Not Relevant" ></f:selectItem>
+                            <f:selectItems value="#{areaController.phmAreas}"/>
+                        </p:selectOneMenu>
+
+
+
+
                     </p:panelGrid>
                     <p:commandButton actionListener="#{areaController.create}" value="#{bundleArea.Save}" update="display,:AreaListForm:datalist,:growl" oncomplete="handleSubmit(args,'AreaCreateDialog');"/>
                     <p:commandButton value="#{bundleArea.Cancel}" onclick="AreaCreateDialog.hide()"/>

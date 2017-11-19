@@ -14,6 +14,7 @@
         </ui:define>
 
         <ui:define name="body">
+
             <h:form id="AreaListForm">
                 <p:panel header="#{bundleArea.ListAreaTitle}">
                     <p:dataTable id="datalist" value="#{areaController.items}" var="item"
@@ -27,6 +28,13 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="AreaType"/>
+                            </f:facet>
+                            <h:outputText value="#{item.areaType}"/>
+                        </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundleArea.ListAreaTitle_name}"/>
@@ -35,9 +43,40 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundleArea.ListAreaTitle_areaType}"/>
+                                <h:outputText value="Province"/>
                             </f:facet>
-                            <h:outputText value="#{item.areaType}"/>
+                            <h:outputText value="#{item.province.name}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="District"/>
+                            </f:facet>
+                            <h:outputText value="#{item.district.name}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Rdhs"/>
+                            </f:facet>
+                            <h:outputText value="#{item.rdhs.name}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Moh"/>
+                            </f:facet>
+                            <h:outputText value="#{item.moh.name}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Phi"/>
+                            </f:facet>
+                            <h:outputText value="#{item.phi.name}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Phm"/>
+                            </f:facet>
+                            <h:outputText value="#{item.phm.name}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundleArea.Create}" actionListener="#{areaController.prepareCreate}" update=":AreaCreateForm" oncomplete="PF('AreaCreateDialog').show()"/>

@@ -38,6 +38,26 @@ public class AreaController implements Serializable {
         return getAreas(AreaType.RDHS);
     }
     
+    public List<Area> getProvinces(){
+        return getAreas(AreaType.Province);
+    }
+    
+    public List<Area> getDistricts(){
+        return getAreas(AreaType.District);
+    }
+    
+    public List<Area> getMohAreas(){
+        return getAreas(AreaType.MOH);
+    }
+    
+    public List<Area> getPhiAreas(){
+        return getAreas(AreaType.PHI);
+    }
+    
+    public List<Area> getPhmAreas(){
+        return getAreas(AreaType.PHM);
+    }
+    
     public List<Area> getAreas(AreaType t) {
         String j;
         Map m = new HashMap();
@@ -55,7 +75,7 @@ public class AreaController implements Serializable {
         m.put("t", AreaType.MOH);
         j = "select a from Area a "
                 + " where a.areaType=:t "
-                + " and a.rdhsArea=:r "
+                + " and a.rdhs=:r "
                 + " order by a.name";
         return getFacade().findBySQL(j, m);
     }
@@ -67,7 +87,7 @@ public class AreaController implements Serializable {
         m.put("t", AreaType.PHM);
         j = "select a from Area a "
                 + " where a.areaType=:t "
-                + " and a.mohArea=:r "
+                + " and a.moh=:r "
                 + " order by a.name";
         return getFacade().findBySQL(j, m);
     }
@@ -117,7 +137,8 @@ public class AreaController implements Serializable {
 
     public List<Area> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            String j ="select a from Area a order by a.name";
+            items = getFacade().findBySQL(j);
         }
         return items;
     }

@@ -11,14 +11,36 @@
         <p:dialog id="AreaViewDlg" widgetVar="AreaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleArea.ViewAreaTitle}">
             <h:form id="AreaViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{areaController.selected != null}">
-                        <h:outputText value="#{bundleArea.ViewAreaLabel_name}"/>
-                        <h:outputText value="#{areaController.selected.name}" title="#{bundleArea.ViewAreaTitle_name}"/>
-                        <h:outputText value="#{bundleArea.ViewAreaLabel_areaType}"/>
-                        <h:outputText value="#{areaController.selected.areaType}" title="#{bundleArea.ViewAreaTitle_areaType}"/>
-                        <h:outputText value="#{bundleArea.ViewAreaLabel_id}"/>
-                        <h:outputText value="#{areaController.selected.id}" title="#{bundleArea.ViewAreaTitle_id}"/>
+
+
+                    <p:panelGrid columns="2">
+                        <h:outputText value="Name:"/>
+                        <h:outputText value="#{areaController.selected.name}" title="Name"/>
+                        <h:outputText value="AreaType:"/>
+                        <h:outputText value="#{areaController.selected.areaType}" title="AreaType"/>
+                        <h:outputText value="Province:"/>
+                        <h:outputText value="#{areaController.selected.province}" title="Province"/>
+                        <h:outputText value="District:"/>
+                        <h:outputText value="#{areaController.selected.district}" title="District"/>
+
+                        <h:outputText value="Rdhs:"/>
+                        <h:outputText value="#{areaController.selected.rdhs}" title="Rdhs"/>
+
+                        
+                        <h:outputText value="Phi:"/>
+                        <h:outputText value="#{areaController.selected.phi}" title="Phi"/>
+                        
+                        <h:outputText value="Phm:"/>
+                        <h:outputText value="#{areaController.selected.phm}" title="Phm"/>
+
+                        <h:outputText value="Moh:"/>
+                        <h:outputText value="#{areaController.selected.moh}" title="Moh"/>
+                        
+                        <h:outputText value="Id:"/>
+                        <h:outputText value="#{areaController.selected.id}" title="Id"/>
                     </p:panelGrid>
+
+
                     <p:commandButton value="#{bundleArea.Close}" onclick="AreaViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

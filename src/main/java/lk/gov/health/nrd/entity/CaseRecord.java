@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
 import lk.gov.health.nrd.enums.CaseType;
 import lk.gov.health.nrd.enums.MaternalIcdPm;
 import lk.gov.health.nrd.enums.MethodOfAssessment;
@@ -58,7 +59,7 @@ public class CaseRecord implements Serializable {
     Area mohArea;
     @ManyToOne
     Area phmArea;
-    Double mothersAge;
+    Integer mothersAge;
     String mothersNic;
     @Enumerated(EnumType.STRING)
     CaseType caseType;
@@ -87,7 +88,7 @@ public class CaseRecord implements Serializable {
     String placeOfDeliveryString;
     @Enumerated(EnumType.STRING)
     TypeOfDelivery typeOfDelivery;
-    
+
     String otherTypeOfDeliveryString;
     Integer pogWeeks;
     Integer pogDays;
@@ -124,7 +125,7 @@ public class CaseRecord implements Serializable {
     Boolean n5;
     Boolean n6;
     Boolean n7;
-     private Boolean n8;
+    private Boolean n8;
     private Boolean n9;
     private Boolean n10;
     private Boolean n11;
@@ -175,6 +176,31 @@ public class CaseRecord implements Serializable {
     Date retiredAt;
     @ManyToOne
     WebUser retiredBy;
+
+    @Transient
+    boolean needEthnicityOther;
+    @Transient
+    boolean needHigher;
+
+    public boolean isNeedHigher() {
+        if(typeOfPregnancy==TypeOfPregnancy.Higher){
+            needHigher=true;
+        }else{
+            needHigher=false;
+        }
+        return needHigher;
+    }
+
+    
+    
+    public boolean isNeedEthnicityOther() {
+        if (ethnicity == Ethnicity.Other) {
+            needEthnicityOther = true;
+        } else {
+            needEthnicityOther = false;
+        }
+        return needEthnicityOther;
+    }
 
     public Long getId() {
         return id;
@@ -288,11 +314,11 @@ public class CaseRecord implements Serializable {
         this.phmArea = phmArea;
     }
 
-    public Double getMothersAge() {
+    public Integer getMothersAge() {
         return mothersAge;
     }
 
-    public void setMothersAge(Double mothersAge) {
+    public void setMothersAge(Integer mothersAge) {
         this.mothersAge = mothersAge;
     }
 
@@ -455,8 +481,6 @@ public class CaseRecord implements Serializable {
     public void setTypeOfDelivery(TypeOfDelivery typeOfDelivery) {
         this.typeOfDelivery = typeOfDelivery;
     }
-
-    
 
     public String getOtherTypeOfDeliveryString() {
         return otherTypeOfDeliveryString;
@@ -746,8 +770,6 @@ public class CaseRecord implements Serializable {
         this.maternalIcdPm = maternalIcdPm;
     }
 
-    
-
     public String getMaternalIcdPmSpecific() {
         return maternalIcdPmSpecific;
     }
@@ -867,8 +889,6 @@ public class CaseRecord implements Serializable {
     public void setRetiredBy(WebUser retiredBy) {
         this.retiredBy = retiredBy;
     }
-    
-    
 
     @Override
     public int hashCode() {

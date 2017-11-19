@@ -54,7 +54,7 @@
                                         <p:outputLabel value="Mother" ></p:outputLabel>
                                         <p:inputText value="#{caseRecordController.selected.mothersNumber}" ></p:inputText>
                                     </p:column>
-                                    <p:column ></p:column>
+                                    <p:column colspan="2" ></p:column>
                                     <p:column >
                                         <p:outputLabel value="Baby" ></p:outputLabel>
                                         <p:inputText value="#{caseRecordController.selected.babysNumber}" ></p:inputText>
@@ -67,7 +67,7 @@
                                     <p:column >
                                         <p:outputLabel value="B" ></p:outputLabel>
                                     </p:column>
-                                    <p:column >
+                                    <p:column colspan="2">
                                         <p:outputLabel value="Name of Mother / Baby" ></p:outputLabel>
                                     </p:column>
                                     <p:column colspan="5" >
@@ -84,7 +84,11 @@
                                     <p:column colspan="5" >
                                         <p:selectOneButton value="#{caseRecordController.selected.ethnicity}" >
                                             <f:selectItems value="#{enumController.ethnicities}" ></f:selectItems>
+                                            <p:ajax process="@this" update="ethnicityOther" ></p:ajax>
                                         </p:selectOneButton>
+                                        <h:panelGroup id="ethnicityOther">
+                                            <p:inputText placeholder="Enter Ethnicity" rendered="#{caseRecordController.selected.needEthnicityOther}" value="#{caseRecordController.selected.ethnicityOther}" ></p:inputText>
+                                        </h:panelGroup>
                                     </p:column>
                                 </p:row>
                                 <p:row >
@@ -94,7 +98,7 @@
                                     <p:column >
                                         <p:outputLabel value="Residential Address" ></p:outputLabel>
                                     </p:column>
-                                    <p:column colspan="4" >
+                                    <p:column colspan="5" >
                                         <p:inputTextarea style="width: 90%;" value="#{caseRecordController.selected.residentialAddress}" ></p:inputTextarea>
                                     </p:column>
                                 </p:row>
@@ -108,24 +112,34 @@
                                     </p:column>
                                     <p:column  >
                                         <p:outputLabel value="RDHS" ></p:outputLabel>
-                                        <p:autoComplete value="#{caseRecordController.selected.rdhsArea}" completeMethod="#{areaController.rdhsAreas}"
-                                                        var="d" itemLabel="#{d.name}" itemValue="#{d}" forceSelection="true" >
-                                            <p:ajax process="@this" ></p:ajax>
-                                        </p:autoComplete>
+                                        <p:selectOneMenu id="rdhs" value="#{caseRecordController.selected.rdhsArea}" >
+                                            <f:selectItem itemLabel="Select RDHS Area" ></f:selectItem>
+                                            <f:selectItems value="#{areaController.rdhsAreas}"
+                                                           var="r" itemLabel="#{r.name}" itemValue="#{r}" />
+                                            <p:ajax process="@this" update="moh" ></p:ajax>
+                                        </p:selectOneMenu>
                                     </p:column>
-                                    <p:column ></p:column>
+                                    <p:column >
+
+                                    </p:column>
                                     <p:column  >
                                         <p:outputLabel value="MOH" ></p:outputLabel>
-                                        <p:autoComplete value="#{caseRecordController.selected.rdhsArea}" completeMethod="#{caseRecordController.selectedMohAreas}"
-                                                        var="m" itemLabel="#{m.name}" itemValue="#{m}" forceSelection="true"  >
-                                            <p:ajax process="@this" ></p:ajax>
-                                        </p:autoComplete>
+                                        <p:selectOneMenu id="moh" value="#{caseRecordController.selected.mohArea}" >
+                                            <f:selectItem itemLabel="Select MOH Area" ></f:selectItem>
+                                            <f:selectItems value="#{areaController.getMohAreas(caseRecordController.selected.rdhsArea)}"
+                                                           var="m" itemLabel="#{m.name}" itemValue="#{m}" />
+                                            <p:ajax process="@this" update="phm" ></p:ajax>
+                                        </p:selectOneMenu>
                                     </p:column>
-                                    <p:column  >
+                                    <p:column colspan="2" >
                                         <p:outputLabel value="PHM" ></p:outputLabel>
-                                        <p:autoComplete value="#{caseRecordController.selected.rdhsArea}" completeMethod="#{caseRecordController.selectedPhmAreas}"
-                                                        forceSelection="true"     var="p" itemLabel="#{p.name}" itemValue="#{p}" ></p:autoComplete>
+                                        <p:selectOneMenu id="phm" value="#{caseRecordController.selected.phmArea}" >
+                                            <f:selectItem itemLabel="Select PHM Area" ></f:selectItem>
+                                            <f:selectItems value="#{areaController.getPhmAreas(caseRecordController.selected.mohArea)}"
+                                                           var="p" itemLabel="#{p.name}" itemValue="#{p}" />
+                                        </p:selectOneMenu>
                                     </p:column>
+
                                 </p:row>
 
                                 <p:row >
@@ -139,7 +153,7 @@
                                         <p:inputText value="#{caseRecordController.selected.mothersAge}" ></p:inputText>
                                         <p:outputLabel value="Years" ></p:outputLabel>
                                     </p:column>
-                                    <p:column >
+                                    <p:column colspan="2">
 
                                     </p:column>
                                     <p:column >
@@ -156,13 +170,10 @@
                                     <p:column >
                                         <p:outputLabel value="Type of Perinatal Death" ></p:outputLabel>
                                     </p:column>
-                                    <p:column >
+                                    <p:column colspan="3">
                                         <p:selectOneButton value="#{caseRecordController.selected.caseType}" >
                                             <f:selectItems value="#{enumController.caseTypes}" ></f:selectItems>
                                         </p:selectOneButton>
-                                    </p:column>
-                                    <p:column >
-
                                     </p:column>
                                     <p:column >
                                         <p:outputLabel value="Contact Phones" ></p:outputLabel>
@@ -180,15 +191,9 @@
                                         <p:outputLabel value="Gravida" ></p:outputLabel>
                                     </p:column>
                                     <p:column >
-                                        <h:panelGrid columns="8" >
+                                        <h:panelGrid columns="2" >
                                             <p:outputLabel value="G" ></p:outputLabel>
-                                            <p:inputText style="width: 20px;" value="#{caseRecordController.selected.g}" ></p:inputText>
-                                            <p:spacer ></p:spacer>
-                                            <p:outputLabel value="P" ></p:outputLabel>
-                                            <p:inputText style="width: 20px;"  value="#{caseRecordController.selected.p}" ></p:inputText>
-                                            <p:spacer ></p:spacer>
-                                            <p:outputLabel value="C" ></p:outputLabel>
-                                            <p:inputText  style="width: 20px;" value="#{caseRecordController.selected.c}" ></p:inputText>
+                                            <p:inputText style="width: 40px;" value="#{caseRecordController.selected.g}" ></p:inputText>
                                         </h:panelGrid>
 
                                     </p:column>
@@ -198,7 +203,7 @@
                                     <p:column >
                                         <p:outputLabel value="I. Parity" ></p:outputLabel>
                                     </p:column>
-                                    <p:column >
+                                    <p:column colspan="2" >
                                         <h:panelGrid columns="18" >
                                             <p:outputLabel value="I." ></p:outputLabel>
                                             <p:spacer height="1" width="1" ></p:spacer>
@@ -228,18 +233,21 @@
                                     <p:column >
                                         <p:outputLabel value="Type of Pregnancy" ></p:outputLabel>
                                     </p:column>
-                                    <p:column >
+                                    <p:column colspan="2" >
                                         <p:selectOneButton value="#{caseRecordController.selected.typeOfPregnancy}" >
                                             <f:selectItems value="#{enumController.typesOfPregnancy}" ></f:selectItems>
+                                            <p:ajax process="@this" update="higher" ></p:ajax>
                                         </p:selectOneButton>
+                                        <h:panelGroup id="higher" >
+                                            <p:inputText style="width: 50px;" value="#{caseRecordController.selected.higherPregnancy}" rendered="#{caseRecordController.selected.needHigher}" ></p:inputText> 
+                                        </h:panelGroup>
+                                        
                                     </p:column>
-                                    <p:column >
 
-                                    </p:column>
                                     <p:column >
                                         <p:outputLabel value="K. Date of Delivery/Birth" ></p:outputLabel>
                                     </p:column>
-                                    <p:column >
+                                    <p:column colspan="2" >
                                         <p:calendar value="#{caseRecordController.selected.dateOfDeliveryOrBirth}"
                                                     navigator="true" pattern="dd MMMM yyyy" >
                                         </p:calendar>
@@ -264,7 +272,7 @@
                                     <p:column >
                                         <p:outputLabel value="M. Time of Delivary" ></p:outputLabel>
                                     </p:column>
-                                    <p:column >
+                                    <p:column colspan="2">
                                         <p:calendar value="#{caseRecordController.selected.timeOfDelivery}" timeOnly="true" pattern="hh:mm a"></p:calendar>
                                     </p:column>
                                 </p:row>
@@ -326,7 +334,7 @@
                                     <p:column >
 
                                     </p:column>
-                                    <p:column colspan="2">
+                                    <p:column colspan="3">
                                         <p:outputLabel value= "R. Sex" ></p:outputLabel>
                                         <p:selectOneButton value="#{caseRecordController.selected.sex}" >
                                             <f:selectItems value="#{enumController.sexes}" ></f:selectItems>
@@ -336,7 +344,7 @@
                                 </p:row>
                                 <p:row >
                                     <p:column >
-                                        <p:outputLabel value="P" ></p:outputLabel>
+                                        <p:outputLabel value="S." ></p:outputLabel>
                                     </p:column>
                                     <p:column colspan="3">
                                         <p:outputLabel value= "Date of Death" ></p:outputLabel>
@@ -347,7 +355,7 @@
                                     </p:column>
                                     <p:column colspan="3">
 
-                                        <p:outputLabel value= "Age at Date (For ENND)" ></p:outputLabel>
+                                        <p:outputLabel value= "T. Age at Date (For ENND)" ></p:outputLabel>
                                         <p:spacer height="1" width="5" ></p:spacer>
                                         <p:inputText value="#{caseRecordController.selected.ageOfDeathDays}" style="width: 60px;" ></p:inputText>
                                         <p:outputLabel value= "days" ></p:outputLabel>
