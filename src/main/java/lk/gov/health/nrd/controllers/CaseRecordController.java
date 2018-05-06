@@ -22,6 +22,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 import lk.gov.health.nrd.entity.Area;
+import lk.gov.health.nrd.entity.Institute;
 import lk.gov.health.nrd.enums.PlaceOfDelivery;
 
 @Named("caseRecordController")
@@ -37,13 +38,21 @@ public class CaseRecordController implements Serializable {
     private lk.gov.health.nrd.facades.PatientFacade ejbFacade;
     private List<CaseRecord> items = null;
     private CaseRecord selected;
+    private String searchText;
+    private Institute institute;
+    private Date fromDate;
+    private Date toDate;
 
-    
-    public String addNewCase(){
+    public String addNewCase() {
         selected = new CaseRecord();
         return "/caseRecord/caseRecord";
     }
-    
+
+    public String toSearchCase() {
+        items = new ArrayList<CaseRecord>();
+        return "/caseRecord/search";
+    }
+
     public AreaController getAreaController() {
         return areaController;
     }
@@ -58,8 +67,8 @@ public class CaseRecordController implements Serializable {
         }
         return getAreaController().getMohAreas(getSelected().getRdhsArea());
     }
-    
-     public List<Area> getSelectedPhmAreas() {
+
+    public List<Area> getSelectedPhmAreas() {
         if (selected == null) {
             return new ArrayList<Area>();
         }
@@ -189,6 +198,41 @@ public class CaseRecordController implements Serializable {
         return getFacade().findAll();
     }
 
+    public String getSearchText() {
+        return searchText;
+    }
+
+    public void setSearchText(String searchText) {
+        this.searchText = searchText;
+    }
+
+    public Institute getInstitute() {
+        return institute;
+    }
+
+    public void setInstitute(Institute institute) {
+        this.institute = institute;
+    }
+
+    public Date getFromDate() {
+        return fromDate;
+    }
+
+    public void setFromDate(Date fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public Date getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(Date toDate) {
+        this.toDate = toDate;
+    }
+
+    
+    
+    
     @FacesConverter(forClass = CaseRecord.class)
     public static class PatientControllerConverter implements Converter {
 

@@ -1,43 +1,41 @@
 package lk.gov.health.nrd.controllers;
 
-import lk.gov.health.nrd.entity.Department;
+import lk.gov.health.nrd.entity.UserDepartment;
 import lk.gov.health.nrd.controllers.util.JsfUtil;
 import lk.gov.health.nrd.controllers.util.JsfUtil.PersistAction;
-import lk.gov.health.nrd.facades.DepartmentFacade;
+import lk.gov.health.nrd.facades.UserDepartmentFacade;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.inject.Named;
-import lk.gov.health.nrd.entity.Institute;
 
-@Named
+@Named("userDepartmentController")
 @SessionScoped
-public class DepartmentController implements Serializable {
+public class UserDepartmentController implements Serializable {
 
     @EJB
-    private lk.gov.health.nrd.facades.DepartmentFacade ejbFacade;
-    private List<Department> items = null;
-    private Department selected;
+    private UserDepartmentFacade ejbFacade;
+    private List<UserDepartment> items = null;
+    private UserDepartment selected;
 
-    public DepartmentController() {
+    public UserDepartmentController() {
     }
 
-    public Department getSelected() {
+    public UserDepartment getSelected() {
         return selected;
     }
 
-    public void setSelected(Department selected) {
+    public void setSelected(UserDepartment selected) {
         this.selected = selected;
     }
 
@@ -47,55 +45,54 @@ public class DepartmentController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private DepartmentFacade getFacade() {
+    private UserDepartmentFacade getFacade() {
         return ejbFacade;
     }
 
-    public Department prepareCreate() {
-        selected = new Department();
+    public UserDepartment prepareCreate() {
+        selected = new UserDepartment();
         initializeEmbeddableKey();
         return selected;
     }
 
+     public void createOrUpdate(UserDepartment ud) {
+        try {
+            if (ud.getId() == null) {
+                getFacade().create(ud);
+                JsfUtil.addSuccessMessage(ud + " created.");
+            } else {
+                getFacade().edit(ud);
+                JsfUtil.addSuccessMessage(ud + " updated.");
+            }
+            items = null;
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage(e.getMessage());
+        }
+
+    }
+    
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("DepartmentCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleUser1").getString("UserDepartmentCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("DepartmentUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleUser1").getString("UserDepartmentUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("DepartmentDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleUser1").getString("UserDepartmentDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-   public List<Department> getItems(String jpql) {
-        return getFacade().findBySQL(jpql);
-    }
-   
-   public List<Department> getItems(Institute ins) {
-       String jpql;
-       jpql = "select d from Department ";
-        return getFacade().findBySQL(jpql);
-    }
-
-    public List<Department> getItems(String jpql, Map m) {
-        return getFacade().findBySQL(jpql, m);
-    }
-
-    public List<Department> getItems() {
+    public List<UserDepartment> getItems() {
         if (items == null) {
-            String j = "Select d "
-                    + " from Department d "
-                    + " order by d.name";
-            items = getFacade().findBySQL(j);
+            items = getFacade().findAll();
         }
         return items;
     }
@@ -119,50 +116,38 @@ public class DepartmentController implements Serializable {
                 if (msg.length() > 0) {
                     JsfUtil.addErrorMessage(msg);
                 } else {
-                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleUser1").getString("PersistenceErrorOccured"));
                 }
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleUser1").getString("PersistenceErrorOccured"));
             }
         }
     }
 
-    public List<Department> getItemsAvailableSelectMany() {
-        return getItems();
+    public UserDepartment getUserDepartment(java.lang.Long id) {
+        return getFacade().find(id);
     }
 
-    public List<Department> getItemsAvailableSelectOne() {
-        return getItems();
+    public List<UserDepartment> getItemsAvailableSelectMany() {
+        return getFacade().findAll();
     }
 
-     public void createOrUpdate(Department dep) {
-        try {
-            if (dep.getId() == null) {
-                getFacade().create(dep);
-                JsfUtil.addSuccessMessage(dep + " created.");
-            } else {
-                getFacade().edit(dep);
-                JsfUtil.addSuccessMessage(dep + " updated.");
-            }
-            items = null;
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage(e.getMessage());
-        }
-
+    public List<UserDepartment> getItemsAvailableSelectOne() {
+        return getFacade().findAll();
     }
-    
-    @FacesConverter(forClass = Department.class)
-    public static class DepartmentControllerConverter implements Converter {
+
+    @FacesConverter(forClass = UserDepartment.class)
+    public static class UserDepartmentControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            DepartmentController controller = (DepartmentController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "departmentController");
-            return controller.getFacade().find(getKey(value));
+            UserDepartmentController controller = (UserDepartmentController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "userDepartmentController");
+            return controller.getUserDepartment(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
@@ -182,11 +167,11 @@ public class DepartmentController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Department) {
-                Department o = (Department) object;
+            if (object instanceof UserDepartment) {
+                UserDepartment o = (UserDepartment) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Department.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), UserDepartment.class.getName()});
                 return null;
             }
         }

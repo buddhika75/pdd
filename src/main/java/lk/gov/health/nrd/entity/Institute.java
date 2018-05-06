@@ -24,25 +24,36 @@ public class Institute implements Serializable {
     private Long id;
     
     String name;
-    String sname;
-    String tname;
+    String address;
+    String telephone;
+    String email;
     @ManyToOne
     Institute parentInstitute;
 
-    public String getSname() {
-        return sname;
+    public String getEmail() {
+        return email;
     }
 
-    public void setSname(String sname) {
-        this.sname = sname;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getTname() {
-        return tname;
+    
+    
+    public String getAddress() {
+        return address;
     }
 
-    public void setTname(String tname) {
-        this.tname = tname;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
     
@@ -95,7 +106,7 @@ public class Institute implements Serializable {
 
     @Override
     public String toString() {
-        return "lk.gov.sp.healthdept.td.entity.Institute[ id=" + id + " ]";
+        return name;
     }
     
 }

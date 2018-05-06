@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./index.xhtml">
+
+
+
+            <ui:define name="manageusers">
+
+                <h:form >
+                    <h:panelGrid columns="1" >
+                        <p:panel header="Manage Institutions of #{userInstituteController.webUser.name}"  >
+                            <p:panelGrid columns="3" >
+                                <p:outputLabel value="Institution" ></p:outputLabel>
+                                <p:selectOneMenu value="#{userInstituteController.institute}" >
+                                    <f:selectItems value="#{webUserController.loggableInstitutes}" ></f:selectItems>
+                                </p:selectOneMenu>
+                                <p:commandButton value="Add Institute" ajax="false" action="#{userInstituteController.addWebUserInstitute()}" ></p:commandButton>
+                            </p:panelGrid>
+                            <p:dataTable value="#{userInstituteController.webUserInstitutes}" var="item">
+                                <p:column width="150">
+                                    <f:facet name="header">
+                                        <h:outputText value="Institute"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.institute}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Action"/>
+                                    </f:facet>
+                                    <p:commandButton ajax="false" value="Remove Privilege" action="#{userInstituteController.removeUserInstitute()}" >
+                                        <f:setPropertyActionListener value="#{item}" target="#{userInstituteController.selected}" ></f:setPropertyActionListener>
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>
+
+
+                        </p:panel>
+                        <p:graphicImage library="image" name="user_view.png" styleClass="sideImage" ></p:graphicImage>
+
+                    </h:panelGrid>
+
+                </h:form>
+
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

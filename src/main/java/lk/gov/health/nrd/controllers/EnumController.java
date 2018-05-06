@@ -16,6 +16,7 @@ import lk.gov.health.nrd.enums.MethodOfAssessment;
 import lk.gov.health.nrd.enums.CaseType;
 import lk.gov.health.nrd.enums.MaternalIcdPm;
 import lk.gov.health.nrd.enums.PlaceOfDelivery;
+import lk.gov.health.nrd.enums.Privilege;
 import lk.gov.health.nrd.enums.TypeOfPregnancy;
 import lk.gov.health.nrd.enums.Sex;
 import lk.gov.health.nrd.enums.TimingOfDeath;
@@ -71,20 +72,18 @@ public class EnumController {
         return TypeOfPregnancy.values();
     }
 
-    
-    public TypeOfDelivery[] getTypesOfDelivary(){
+    public TypeOfDelivery[] getTypesOfDelivary() {
         return TypeOfDelivery.values();
     }
-    
-     
-    public MethodOfAssessment[] getMethodsOfAssessment(){
+
+    public MethodOfAssessment[] getMethodsOfAssessment() {
         return MethodOfAssessment.values();
     }
-    
-    public PlaceOfDelivery[] getPlacesOfDelivary(){
+
+    public PlaceOfDelivery[] getPlacesOfDelivary() {
         return PlaceOfDelivery.values();
     }
-    
+
     public Religion[] getReligions() {
         return Religion.values();
     }
@@ -92,12 +91,16 @@ public class EnumController {
     public AreaType[] getAreaTypes() {
         return AreaType.values();
     }
-    
+
     public TimingOfDeath[] getTimingOfDeaths() {
         return TimingOfDeath.values();
     }
 
-    public MaternalIcdPm[] getMaternalIcdPms(){
+    public MaternalIcdPm[] getMaternalIcdPms() {
         return MaternalIcdPm.values();
+    }
+
+    public Privilege[] getPrivileges() {
+        return Privilege.values();
     }
 }

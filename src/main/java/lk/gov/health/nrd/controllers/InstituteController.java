@@ -7,6 +7,7 @@ import lk.gov.health.nrd.facades.InstituteFacade;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -74,10 +75,25 @@ public class InstituteController implements Serializable {
         }
     }
 
+    public List<Institute> getItems(String jpql) {
+        return getFacade().findBySQL(jpql);
+    }
+
+    public List<Institute> getItems(String jpql, Map m) {
+        return getFacade().findBySQL(jpql, m);
+    }
+
     public List<Institute> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            String j = "select i from Institute i order by i.name";
+            items = getFacade().findBySQL(j);
         }
+        return items;
+    }
+
+    public List<Institute> getAllItems() {
+        String j = "select i from Institute i order by i.name";
+        items = getFacade().findBySQL(j);
         return items;
     }
 
@@ -114,11 +130,27 @@ public class InstituteController implements Serializable {
     }
 
     public List<Institute> getItemsAvailableSelectMany() {
-        return getFacade().findAll();
+        return getItems();
     }
 
     public List<Institute> getItemsAvailableSelectOne() {
-        return getFacade().findAll();
+        return getItems();
+    }
+
+    public void createOrUpdate(Institute ins) {
+        try {
+            if (ins.getId() == null) {
+                getFacade().create(ins);
+                JsfUtil.addSuccessMessage(ins + " created.");
+            } else {
+                getFacade().edit(ins);
+                JsfUtil.addSuccessMessage(ins + " updated.");
+            }
+            items = null;
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage(e.getMessage());
+        }
+
     }
 
     @FacesConverter(forClass = Institute.class)

@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 /**
  *
@@ -39,7 +40,17 @@ public class WebUser implements Serializable {
     Institute institute;
     @ManyToOne
     Department department;
+@Transient
+    String repeatPassword;
 
+    public String getRepeatPassword() {
+        return repeatPassword;
+    }
+
+    public void setRepeatPassword(String repeatPassword) {
+        this.repeatPassword = repeatPassword;
+    }
+    
     public Department getDepartment() {
         return department;
     }

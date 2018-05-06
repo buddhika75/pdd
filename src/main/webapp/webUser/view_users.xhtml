@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <body>
+
+        <ui:composition template="./index.xhtml">
+
+            <ui:define name="userimage">
+                <p:graphicImage library="image" name="user_view.png" styleClass="sideImage" ></p:graphicImage>
+            </ui:define>
+
+            <ui:define name="manageusers">
+
+                <h:form>
+                    <p:panel header="View Users"  >
+                        <p:dataTable value="#{webUserController.items}" var="item">
+                            <p:column width="150">
+                                <f:facet name="header">
+                                    <h:outputText value="UserName"/>
+                                </f:facet>
+                                <h:outputText value="#{item.userName}"/>
+                            </p:column>
+                            <p:column width="150">
+                                <f:facet name="header">
+                                    <h:outputText value="Name"/>
+                                </f:facet>
+                                <h:outputText value="#{item.name}"/>
+                            </p:column>
+                            <p:column width="150">
+                                <f:facet name="header">
+                                    <h:outputText value="Email"/>
+                                </f:facet>
+                                <h:outputText value="#{item.email}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Action"/>
+                                </f:facet>
+                                <p:commandButton ajax="false" value="Change Password" action="#" ></p:commandButton>
+                                <p:commandButton ajax="false" value="Inactivate" action="#" ></p:commandButton>
+                                <p:commandButton ajax="false" value="Activate" action="#" ></p:commandButton>
+                                <p:commandButton ajax="false" value="Manage Privileges" action="#{webUserController.toManagePrivilege()}" >
+                                    <f:setPropertyActionListener value="#{item}" target="#{userPrivilegeController.webUser}" ></f:setPropertyActionListener>
+                                </p:commandButton>
+                                <p:commandButton ajax="false" value="Loggable Institutes" action="#{webUserController.toManageInstitutes()}" >
+                                     <f:setPropertyActionListener value="#{item}" target="#{userInstituteController.webUser}" ></f:setPropertyActionListener>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+
+
+                    </p:panel>
+                </h:form>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -6,8 +6,9 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <title><ui:insert name="title">Perinatal Death Database</ui:insert></title>
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
+         <h:outputStylesheet library="css" name="main.css"/>
         <h:outputScript library="js" name="jsfcrud.js"/>
     </h:head>
 
@@ -19,14 +20,15 @@
 
             <p:growl id="growl" life="3000" autoUpdate="true" />
 
-            <p:layoutUnit position="north" header="Rheumatology Clinic Data Registryof Sri Lanka" >
+            <p:layoutUnit position="north" header="Perinatal Death Database of Sri Lanka" size="80" >
 
+             
 
                 <h:form id="menuForm"  rendered="#{webUserController.loggedUser ne null}" >
                     <p:menubar>
                         <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
                         <p:submenu label="Notifications" >
-                            <p:menuitem value="Search Case" action="#{caseRecordController.addNewCase}" ajax="false" />
+                            <p:menuitem value="Search Case" action="#{caseRecordController.toSearchCase()}" ajax="false" />
                             <p:menuitem value="Add New Case" action="#{caseRecordController.addNewCase}" ajax="false" />
                         </p:submenu>
                         <p:submenu label="Reports" >
@@ -42,11 +44,10 @@
                             <p:menuitem value="Area" outcome="/area/List.xhtml" />
                            <p:menuitem value="Institute" outcome="/institute/List.xhtml" />
                            <p:menuitem value="Units" outcome="/department/List.xhtml" />
-                           <p:menuitem value="Users" outcome="/webUser/List.xhtml" />
                         </p:submenu>
 
                         <p:submenu label="Administration">
-                            <p:menuitem value="Manage Users" outcome="/department/List.xhtml" />
+                            <p:menuitem value="Manage Users" action="/webUser/index" />
                         </p:submenu>
 
 
@@ -58,6 +59,7 @@
 
             <p:layoutUnit position="south" >
                 <ui:insert name="footer">
+                       #{webUserController.loggableInstitutes}
                     <h:panelGrid columns="4" >
                         <p:outputLabel value="&copy; Health Information Unit, Ministry of Health, Nutrition and Indigenous Medicine" ></p:outputLabel>
                         <h:panelGroup >
@@ -77,8 +79,9 @@
 
             <p:layoutUnit position="center" >
 
-                <div class="appbg" >
+             
 
+                    
 
                     <p:panel header="Login" style="position: absolute; width: 390px; margin: auto; left: 2%; top:20%; padding: 10px;" rendered="#{webUserController.loggedUser eq null}" >
                         <h:form >
@@ -102,7 +105,7 @@
                         <ui:insert name="body"> </ui:insert>
                     </h:panelGroup>
 
-                </div>
+              
             </p:layoutUnit>
 
         </p:layout>

@@ -12,14 +12,20 @@
             <h:form id="InstituteCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{instituteController.selected != null}">
-                        <p:outputLabel value="#{bundleIns.CreateInstituteLabel_sname}" for="sname" />
-                        <p:inputText id="sname" value="#{instituteController.selected.sname}" title="#{bundleIns.CreateInstituteTitle_sname}" />
-                        <p:outputLabel value="#{bundleIns.CreateInstituteLabel_tname}" for="tname" />
-                        <p:inputText id="tname" value="#{instituteController.selected.tname}" title="#{bundleIns.CreateInstituteTitle_tname}" />
                         <p:outputLabel value="#{bundleIns.CreateInstituteLabel_name}" for="name" />
                         <p:inputText id="name" value="#{instituteController.selected.name}" title="#{bundleIns.CreateInstituteTitle_name}" />
-                        <p:outputLabel value="#{bundleIns.CreateInstituteLabel_parentInstitute}" for="parentInstitute" />
+                        
+                        <p:outputLabel value="Address" for="sname" />
+                        <p:inputText id="sname" value="#{instituteController.selected.address}" title="Address" />
+                        <p:outputLabel value="Telephone" for="tname" />
+                        <p:inputText id="tname" value="#{instituteController.selected.telephone}" title="Telephone" />
+                        <p:outputLabel value="Email" for="email" />
+                        <p:inputText id="email" value="#{instituteController.selected.email}" title="Email" />
+                        
+                        <p:outputLabel value="Parent Institute" for="parentInstitute" />
                         <p:selectOneMenu id="parentInstitute" value="#{instituteController.selected.parentInstitute}" >
+                            <f:selectItem itemLabel="Select" ></f:selectItem>
+                            
                             <f:selectItems value="#{instituteController.itemsAvailableSelectOne}"
                                            var="parentInstituteItem"
                                            itemValue="#{parentInstituteItem}"/>
